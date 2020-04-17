@@ -1,0 +1,94 @@
+<%- extend('../../../dashbase.ejs') %>
+
+<div class="row">
+    <div class="col-md-10 offset-md-1">
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <h3 class="card-title">
+                    Liste de toutes les notifications
+                </h3>
+                <p class="card-category">
+                    Type Individus
+                </p>
+            </div>
+            <div class="card-body">
+                <% if(locals.info == "yes") {%>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="text-primary">
+                            <th>
+                                Identifiant
+                            </th>
+                            <th>
+                                Titre
+                            </th>
+                            <th>
+                                Lien Web
+                            </th>
+                            <th>
+                                Niveau Importance
+                            </th>
+                            <th>
+                                Suppression
+                            </th>
+                        </thead>
+                        <tbody>
+                            <% for(notification of notifications) { %>
+                            <tr>
+                                <td>
+                                    <%= notification.codeNotification %>
+                                </td>
+                                <td>
+                                    <%= notification.titre %>
+                                </td>
+                                <td>
+                                    <a href="<%= notification.lienWeb %>">
+                                        <%= notification.lienWeb %>
+                                    </a>
+                                </td>
+                                <td>
+                                    <% if(notification.importance == 0) { %>
+                                        <span style="color: blue;">
+                                            <b>
+                                                Faible
+                                            </b>
+                                        </span>
+                                        <% } %>
+                                        <% if(notification.importance == 1) { %>
+                                        <span class="text-warning">
+                                            <b>
+                                                Moyen
+                                            </b>
+                                        </span>
+                                        <% } %>
+                                        <% if(notification.importance == 2) { %>
+                                        <span class="text-danger">
+                                            <b>
+                                                Fort
+                                            </b>
+                                        </span>
+                                        <% } %>
+                                </td>
+
+                                <td>
+                                    <a href="/root/service_com/notifications/delete/<%= notification.codeNotification %> "
+                                        class="btn btn-danger btn-round">
+                                        Effectuer Ici
+                                    </a>
+                                </td>
+                            </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+                <% } else { %>
+                <div class="alert alert-warning" style="text-align: center; color: black;">
+                    <h3>
+                        Aucune notification existante
+                    </h3>
+                </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>
