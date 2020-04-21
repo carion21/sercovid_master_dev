@@ -1,12 +1,13 @@
 class ElementSidebare {
     
-    static  nouveauElement(texte, route, icone, active){
+    static  nouveauElement(texte, route, icone, active, description){
 
         var nouveau = {
             texte: texte,
             route: route,
             icone: icone,
-            active: active
+            active: active,
+            description: description
         }
 
         return nouveau

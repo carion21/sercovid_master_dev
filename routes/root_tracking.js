@@ -10,6 +10,7 @@ const PositionIndividu = require('../models/PositionIndividu')
 const Zone = require('../models/Zone')
 
 const geolib = require('geolib')
+const TransformDate = require('../config/transform_date')
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -618,8 +619,12 @@ router.post('/:trackercible/tracking_special/:codecible', (req, res, next) => {
                                         var datefin = user_date_fin
                                     }
 
-                                    var dd = Date.parse("" + datedebut + "")
-                                    var df = Date.parse("" + datefin + "")
+                                    var dd = new Date(datedebut)
+                                    var df = new Date(datefin)
+
+                                    var ndd = TransformDate.transform(dd)
+                                    var ndf = TransformDate.transform(df)
+
 
                                     var rayon = parseFloat(rayon)
 
@@ -627,34 +632,25 @@ router.post('/:trackercible/tracking_special/:codecible', (req, res, next) => {
                                     //console.log(df)
 
 
-                                    PositionIndividu.findByOneField('code_individu', codecible, (futciblepositions) => {
+                                    let totalothercible = []
+                                    let bonnepositions = []
+                                    let result = []
+
+                                    PositionIndividu.findBetweenByOneField('code_individu', codecible, 'date_register', ndd, ndf, (futciblepositions) => {
                                         if (futciblepositions.length != 0 && futciblepositions != null) {
 
-                                            var ciblepositions = []
+                                            console.log(futciblepositions)
 
-                                            console.log("AVANT FILTRE " + futciblepositions.length)
-                                            console.log(ciblepositions.length)
-                                            futciblepositions.forEach(cibleposition => {
-                                                var dcp = Date.parse(cibleposition.dateRegister)
-                                                if (dcp >= dd && dcp <= df && cibleposition.latitude != "" && cibleposition.latitude != "") {
-
-                                                    //console.log("dcp :"+dcp)
-
-                                                    ciblepositions.push(cibleposition)
-
-                                                }
-                                            });
-
-                                            console.log("APRES FILTRE" + ciblepositions.length)
+                                            console.log("APRES FILTRE" + futciblepositions.length)
 
                                             var bonne_distance = 1.2 * rayon
 
                                             console.log("bonne distance : " + bonne_distance)
 
-                                            var totalciblepositions = []
-                                            for (let index = 0; index < ciblepositions.length - 1; index++) {
-                                                const aposition = ciblepositions[index];
-                                                const bposition = ciblepositions[index + 1];
+                                            let totalciblepositions = []
+                                            for (let index = 0; index < futciblepositions.length - 1; index++) {
+                                                const aposition = futciblepositions[index];
+                                                const bposition = futciblepositions[index + 1];
 
                                                 console.log("INDEX : " + index)
 
@@ -669,7 +665,6 @@ router.post('/:trackercible/tracking_special/:codecible', (req, res, next) => {
 
                                                 const distance = geolib.getDistance(a, b)
 
-
                                                 //var bonne_distance = 1.2*rayon
 
                                                 //console.log("bonne distance : "+bonne_distance)
@@ -680,7 +675,7 @@ router.post('/:trackercible/tracking_special/:codecible', (req, res, next) => {
                                                 } else {
                                                     if (distance == 0) {
                                                         //console.log("distance actuelle : "+distance)
-                                                        //console.log("inutile je te saute alors")
+                                                        console.log("inutile je te saute alors")
                                                         continue
                                                     }
                                                     if (distance > bonne_distance) {
@@ -718,7 +713,7 @@ router.post('/:trackercible/tracking_special/:codecible', (req, res, next) => {
                                                                 let maincentre = centre
 
                                                                 let newdistance = geolib.getDistance(a, maincentre)
-                                                                //console.log("NEWDISTANCE : "+newdistance)
+                                                                console.log("NEWDISTANCE : "+newdistance)
                                                                 //z++
                                                                 //break
                                                             } else {
@@ -773,6 +768,7 @@ router.post('/:trackercible/tracking_special/:codecible', (req, res, next) => {
                                                                     });
 
                                                                     newdistance = geolib.getDistance(a, maincentre)
+                                                                    console.log("NEWDISTANCE : "+newdistance)
                                                                     //z++
 
                                                                 }
@@ -798,8 +794,7 @@ router.post('/:trackercible/tracking_special/:codecible', (req, res, next) => {
                                             console.log("BRUTES CIBLES POSITIONS  : " + futciblepositions.length)
                                             console.log("TOTAL CIBLES POSITIONS : " + totalciblepositions.length)
 
-                                            let totalothercible = []
-                                            let bonnepositions = []
+                                            
                                             //let othercibles = []
                                             PositionIndividu.all((allpositions) => {
                                                 if (allpositions.length != 0 && allpositions != null) {
@@ -812,13 +807,13 @@ router.post('/:trackercible/tracking_special/:codecible', (req, res, next) => {
                                                         if (dateactuposition >= dd && dateactuposition <= df) {
                                                             bonnepositions.push(actuposition)
                                                         } else {
-                                                            console.log("Position inutile")
+                                                            //console.log("Position inutile")
                                                             continue;
                                                         }
                                                         
                                                     }
-                                                    console.log(true)
-                                                    console.log(totalothercible.length)
+                                                    //console.log(true)
+                                                    //console.log(totalothercible.length)
                                                     let actudistance;
                                                     totalciblepositions.forEach(cibleposition => {
                                                         bonnepositions.forEach(otherposition => {
@@ -853,24 +848,42 @@ router.post('/:trackercible/tracking_special/:codecible', (req, res, next) => {
                                                     console.log(totalothercible)
                                                     console.log("nombres des contacts possibles : " + totalothercible.length)
 
+                                                    let result = {
+                                                        type: trackercible,
+                                                        identifiantCible: codecible,
+                                                        dateDebut: new Date(dd),
+                                                        heureDebut: "Non pris en charge pour l'instant",
+                                                        dateFin: new Date(df),
+                                                        heureFin: "Non pris en charge pour l'instant",
+                                                        rayon: rayon,
+                                                        nbIndividus: totalothercible.length,
+                                                        individus: totalothercible
+                                                        
+                                                    }
+
+                                                    var type = 1
+
+                                                    console.log(result)
+
+                                                    res.render(
+                                                        'root/tracking/tracking_special', {
+                                                            tabside: tabside,
+                                                            idpage: idpage,
+                                                            typeTracking: type,
+                                                            firstposition: futfirst[0],
+                                                            lastposition: futlast[0],
+                                                            individu: individu,
+                                                            notrack: 0,
+                                                            excontent: content,
+                                                            result: result
+                                                        }
+                                                    );
+
                                                 }
                                             })
-
-                                            var result = {
-                                                type: trackercible,
-                                                identifiantCible: codecible,
-                                                dateDebut: new Date(dd),
-                                                heureDebut: "Non pris en charge pour l'instant",
-                                                dateFin: new Date(df),
-                                                heureFin: "Non pris en charge pour l'instant",
-                                                rayon: rayon,
-                                                nbIndividus: totalothercible.length,
-                                                individus: totalothercible
-                                                
-                                            }
-
+                                        } else {
                                             var type = 1
-
+                                            var error = "SVP, il n'y a aucun enregistrement entre ces dates."
                                             res.render(
                                                 'root/tracking/tracking_special', {
                                                     tabside: tabside,
@@ -880,14 +893,12 @@ router.post('/:trackercible/tracking_special/:codecible', (req, res, next) => {
                                                     lastposition: futlast[0],
                                                     individu: individu,
                                                     notrack: 0,
-                                                    excontent: content,
-                                                    result: result
+                                                    error: error,
+                                                    excontent: content
                                                 }
                                             );
                                         }
                                     })
-
-
                                 } else {
                                     var type = 1
                                     var error = "SVP, Le rayon est obligatoire, doit être numérique positif et différent de 0."
@@ -968,13 +979,13 @@ router.post('/:trackercible/tracking_special/:codecible', (req, res, next) => {
 
                     if(datedebut < datefin){
 
-                        if (datefin >= vrai_date_fin) {
+                        if (vrai_date_fin >= datefin) {
                             console.log(datedebut)
                             console.log(datefin)
 
                             let totalothercible = []
 
-                            //PREMIERALGORITHME ANS OPTIMISATION
+                            //PREMIER ALGORITHME SANS OPTIMISATION
                             PositionIndividu.all((futpositions) => {
                                 if(futpositions.length !== 0 && futpositions !== null){
                                     for (let index = 0; index < futpositions.length; index++) {
@@ -993,7 +1004,7 @@ router.post('/:trackercible/tracking_special/:codecible', (req, res, next) => {
                                             }
                                             let actudistance = geolib.getDistance(aposition, zposition)
                                             let rayon = parseFloat(zone.rayon)
-    
+
                                             //STOCKAGE
                                             if (actudistance <= rayon) {
                                                 //console.log(otherposition.codeIndividu)
@@ -1004,9 +1015,6 @@ router.post('/:trackercible/tracking_special/:codecible', (req, res, next) => {
                                                 } else {
                                                     totalothercible.push(oposition.codeIndividu)
                                                 }
-        
-                                                
-        
                                             }
                                         } else {
                                             console.log("Position inutile")
@@ -1043,7 +1051,7 @@ router.post('/:trackercible/tracking_special/:codecible', (req, res, next) => {
                                     individus: totalothercible
                                     
                                 }
-        
+
                                 var type = 2
                                 res.render(
                                     'root/tracking/tracking_special', {

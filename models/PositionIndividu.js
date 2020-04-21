@@ -89,11 +89,12 @@ class PositionIndividu {
 						'	HAVING '+ field + ' = "' + value + '" )'
 		connection.query(sql, [value], 
 			(err, rows) => {
-				console.log(sql)
+			//	console.log(sql)
 				if (err) throw err
 				cb(rows.map((row) => new PositionIndividu(row)))
 			})
 	}
+
 	/**
 	 * 
 	 * @param {*} field 
@@ -109,18 +110,19 @@ class PositionIndividu {
 						'	HAVING '+ field + ' = "' + value + '" )'
 		connection.query(sql, [value], 
 			(err, rows) => {
-				console.log(sql)
+			//	console.log(sql)
 				if (err) throw err
 				cb(rows.map((row) => new PositionIndividu(row)))
 			})
 	}
+
 
 	static findBetweenByOneField(fieldWhere, valueWhere, fieldBetween, valueBetween1, valueBetween2, cb){
 		let TABLE = PositionIndividu.TABLE()
 	//	let sql = 'SELECT * FROM '+ TABLE +' WHERE '+ field +' = ?, AND date_register = max(date_register)'
 		let sql = 	'SELECT * FROM '+ TABLE +
 						' 	WHERE '+fieldWhere+' = "'+valueWhere+'"'+
-						'	AND ' + fieldBetween + ' BETWEEN  '+ valueBetween1 + '  AND  ' + valueBetween2
+						'	AND ' + fieldBetween + ' BETWEEN  "'+ valueBetween1 + '"  AND  "' + valueBetween2+'"'
 		connection.query(sql, 
 			(err, rows) => {
 				console.log(sql)
@@ -128,7 +130,6 @@ class PositionIndividu {
 				cb(rows.map((row) => new PositionIndividu(row)))
 			})
 	}
-
 
 	/**
 	 * trouver une ligne de la table
@@ -146,6 +147,7 @@ class PositionIndividu {
 				cb(rows.map((row) => new PositionIndividu(row)))
 			})
 	}
+
 
 		/**
 	 * trouver une ligne de la table

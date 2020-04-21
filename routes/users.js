@@ -9,6 +9,8 @@ const GoTrackTracksPoints = require('../models/go_track_trackspoints')
 const csvjson = require('csvjson');
 const readFile = require('fs').readFile;
 
+const TransformDate = require('../config/transform_date')
+
 /* GET users listing. */
 router.get('/', function (req, res, next) {
     var fichier1 = '/home/carion/zeus/gcovid19/samdev/sercovid_master/csv/go_track_tracks.csv'
@@ -209,20 +211,36 @@ router.get('/create_positions', (req, res, next) => {
 })
 
 router.get('/test', (req, res, next) => {
-    var tab = [
-        "a",
-        "b",
-        "c",
-        "d"
-    ]
 
-    GoTrackTracks.all((futracks) => {
-        console.log(futracks);
+    var code2 = "Individu-4507370"
+    var code1 = "Individu-5209014"
+
+    var codecible = code2
+
+    PositionIndividu.findFirstByOneField('code_individu', codecible, (futfirst) => {
+        PositionIndividu.findLastByOneField('code_individu', codecible, (futlast) => {
+            var dd = new Date(futfirst[0].dateRegister)
+            var df = new Date(futlast[0].dateRegister)
+
+            console.log(dd)
+            console.log(df)
+            var ndd = TransformDate.transform(dd)
+            var ndf = TransformDate.transform(df)
+
+            PositionIndividu.findBetweenByOneField('code_individu', codecible, 'date_register', ndd, ndf, (futpositions) => {
+                if (futpositions.length !== 0 && futpositions !== null) {
+                    //console.log(futpositions)
+                    //res.send('ok')
+                    res.json(futpositions)
+                } else {
+                    console.log(futpositions)
+                    res.send('nok')
+                }
+            })
+
+        })
     })
 
-    console.log(tab.indexOf("a"));
-    res.send('ok')
-    
 })
 
 module.exports = router;

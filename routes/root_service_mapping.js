@@ -5,7 +5,9 @@ const tabsidebase = require('../config/tabsidebase')
 
 const geolib = require('geolib')
 
+const Individu = require('../models/Individu')
 const Zone = require('../models/Zone')
+PositionIndividu = require('../models/PositionIndividu')
 
 
 /* GET home page. */
@@ -34,14 +36,63 @@ router.get('/:tachedesuivi', (req, res, next) => {
 
     switch (tachedesuivi) {
         case 'suivi_individus':
-            res.render(
-                'root/service_mapping/suivi_individus', {
-                    tabside: tabside,
-                    idpage: idpage
+
+        /**
+         * 1ER MODELE 
+         */
+        
+        Individu.all((futindividus) =>  {
+            if(futindividus.length !== 0 && futindividus !== null){
+                let info = "yes"
+                const lastpositions = []
+                var i = 0
+                for (let index = 0; index < futindividus.length; index++) {
+                    const individu = futindividus[index];
+                    PositionIndividu.findLastByOneField('code_individu', individu.codeIndividu,(futposition) => {
+                        if (futposition.length == 1) {
+                            //console.log(futposition[0])
+                            lastpositions[index] = futposition[0]
+                            console.log(lastpositions.length)
+                            i++
+                        }
+                    })
                 }
-            );
+                /*
+                futindividus.forEach(individu => {
+                    PositionIndividu.findLastByOneField('code_individu', individu.codeIndividu,(futposition) => {
+                        if (futposition.length == 1) {
+                            console.log(futposition[0])
+                            lastpositions.push(futposition[0])
+                        }
+                    })
+                });*/
+
+                console.log(i)
+                
+                res.render(
+                    'root/service_mapping/suivi_individus', {
+                        tabside: tabside,
+                        idpage: idpage
+                    }
+                );
+                
+            } else {
+                var info = "no"
+                console.log("Aucun individus en stockage.")
+
+                res.render(
+                    'root/service_mapping/suivi_individus', {
+                        tabside: tabside,
+                        idpage: idpage
+                    }
+                );
+                
+            }
+        })
+
             break;
         case 'zonarisque':
+
             Zone.findByOneField('statut', 1, (futzones) => {
                 let info;
                 let zonar = 1

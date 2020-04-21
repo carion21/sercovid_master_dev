@@ -1,0 +1,94 @@
+<%- extend('../../dashbase.ejs') %>
+
+<style>
+    .alinea {
+        text-indent: 60px;
+    }
+
+    .contenu {
+        font-size: 22px;
+    }
+</style>
+
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <div class="row justify-content-center">
+                    <div class="card-title">
+                        <h1>
+                            DOCUMENTATION INTERFACE
+                            <b>
+                                SERCOVID-MASTER
+                            </b>
+                        </h1>
+                    </div>
+                    <br>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="card-category">
+                        <b>
+                            ( SERCOVID-19 )
+                        </b>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+
+            <% for(side of tabside) { %> 
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <div class="card-icon">
+                            <i class="material-icons"><%= side.icone %></i>
+                        </div>
+
+                        <div class="row justify-content-between">
+                            <div class="col-md-6">
+                                <div class="card-title">
+                                    <h2>
+                                        <%= side.texte %>
+                                    </h2>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="<%= side.route %>" class="btn btn-primary">
+                                    Je suis ici
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="contenu alinea">
+                            <%= side.description %>
+                        </div>
+                    </div>
+                </div>
+                <br>
+
+            <% } %> 
+                
+            </div>
+
+            <div class="card-footer">
+                <div class="stats">
+                    <i class="material-icons">date_range</i>Dernières 24 Heures
+                </div>
+                <div class="stats">
+                    <i class="material-icons">people</i> Par l'équipe SERCOVID-19
+                    ___
+                    <i class="material-icons">contact_phone</i> 
+                    <b>
+                        +225 67623971 
+                    </b> 
+                   
+                    <b>
+                        +225 76650969 
+                    </b>
+                </div>
+            </div>
+
+        </div>
+        
+    </div>
+</div>
+</div>

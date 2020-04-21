@@ -51,7 +51,13 @@
                 <h1 class="card-title"><%= total_connectes %>
                     <br>
                     <small style="font-size: 25px">soit</small>
-                    <small><b>75%</b></small>
+                    <small><b>
+                        <% if(pourcent_connectes != Infinity) { %> 
+                            <%= pourcent_connectes %> %
+                        <% } else { %>
+                            0.00 %
+                        <% } %>  
+                    </b></small>
                 </h1>
             </div>
             <div class="card-footer">
@@ -71,7 +77,13 @@
                 <h1 class="card-title"><%= total_deconnectes %>
                     <br>
                     <small style="font-size: 25px">soit</small>
-                    <small><b>25%</b></small>
+                    <small><b>
+                        <% if(pourcent_deconnectes != Infinity) { %> 
+                            <%= pourcent_deconnectes %> %
+                        <% } else { %>
+                            0.00 %
+                        <% } %>  
+                    </b></small>
                 </h1>
             </div>
             <div class="card-footer">
@@ -129,8 +141,13 @@
                     <br>
                     <small style="font-size: 25px">soit</small>
                     <small>
-                        <b><%= ((total_actifs/total_suivis)*100 ) %> 
-                        %</b>
+                        <b>
+                            <% if(pourcent_actifs != Infinity) { %> 
+                                <%= pourcent_actifs %> %
+                            <% } else { %>
+                                0.00 %
+                            <% } %>  
+                        </b>
                     </small>
                 </h1>
             </div>
@@ -152,8 +169,13 @@
                     <br>
                     <small style="font-size: 25px">soit</small>
                     <small>
-                        <b><%= ((total_nonactifs/total_suivis)*100 ) %> 
-                        %</b>
+                        <b>
+                            <% if(pourcent_nonactifs != Infinity) { %> 
+                                <%= pourcent_nonactifs %> %
+                            <% } else { %>
+                                0.00 %
+                            <% } %>  
+                        </b>
                     </small>
                 </h1>
             </div>
@@ -198,8 +220,13 @@
                     <br>
                     <small style="font-size: 25px">soit</small>
                     <small>
-                        <b><%= ((total_sains/total_suivis)*100 ) %> 
-                        %</b>
+                        <b>
+                            <% if(pourcent_sains != Infinity) { %> 
+                                <%= pourcent_sains %> %
+                            <% } else { %>
+                                0.00 %
+                            <% } %>  
+                        </b>
                     </small>
                 </h1>
             </div>
@@ -224,8 +251,13 @@
                     <br>
                     <small style="font-size: 25px">soit</small>
                     <small>
-                        <b><%= ((total_suspects/total_suivis)*100 ) %> 
-                        %</b>
+                        <b>
+                            <% if(pourcent_suspects != Infinity) { %> 
+                                <%= pourcent_suspects %> %
+                            <% } else { %>
+                                0.00 %
+                            <% } %>  
+                        </b>
                     </small>
                 </h1>
             </div>
@@ -250,8 +282,13 @@
                     <br>
                     <small style="font-size: 25px">soit</small>
                     <small>
-                        <b><%= ((total_infectes/total_suivis)*100 ) %> 
-                        %</b>
+                        <b>
+                            <% if(pourcent_infectes != Infinity) { %> 
+                                <%= pourcent_infectes %> %
+                            <% } else { %>
+                                <%= pourcent_infectes %> %
+                            <% } %>  
+                        </b>
                     </small>
                 </h1>
             </div>
@@ -272,7 +309,13 @@
                 <h1 class="card-title">0
                     <br>
                     <small style="font-size: 25px">soit</small>
-                    <small><b>0%</b></small>
+                    <small><b>
+                        <% if(pourcent_decedes != Infinity) { %> 
+                            <%= pourcent_decedes %> %
+                        <% } else { %>
+                            0.00 %
+                        <% } %>  
+                    </b></small>
                 </h1>
             </div>
             <div class="card-footer">
@@ -312,10 +355,10 @@
                     <i class="material-icons">people</i>
                 </div>
                 <p class="card-category">TOTAL INDIVIDUS INFECTÉS</p>
-                <h1 class="card-title">100
+                <h1 class="card-title">0
                     <br>
                     <small style="font-size: 25px">soit</small>
-                    <small><b>50%</b></small>
+                    <small><b>0%</b></small>
                 </h1>
             </div>
             <div class="card-footer">
@@ -332,10 +375,10 @@
                     <i class="material-icons">people</i>
                 </div>
                 <p class="card-category">TOTAL INDIVIDUS EN TRAITEMENT</p>
-                <h1 class="card-title">75
+                <h1 class="card-title">0
                     <br>
                     <small style="font-size: 25px">soit</small>
-                    <small><b>37,5%</b></small>
+                    <small><b>0%</b></small>
                 </h1>
             </div>
             <div class="card-footer">
@@ -352,10 +395,10 @@
                     <i class="material-icons">people</i>
                 </div>
                 <p class="card-category">TOTAL INDIVIDUS GUÉRIS</p>
-                <h1 class="card-title">25
+                <h1 class="card-title">0
                     <br>
                     <small style="font-size: 25px">soit</small>
-                    <small><b>12,5%</b></small>
+                    <small><b>0%</b></small>
                 </h1>
             </div>
             <div class="card-footer">
@@ -412,10 +455,10 @@
                     <i class="material-icons">people</i>
                 </div>
                 <p class="card-category">TOTAL INDIVIDUS INFECTÉS</p>
-                <h1 class="card-title">100000000
+                <h1 class="card-title">0
                     <br>
                     <small style="font-size: 25px">soit</small>
-                    <small><b>50%</b></small>
+                    <small><b>0%</b></small>
                 </h1>
             </div>
             <div class="card-footer">
@@ -432,10 +475,10 @@
                     <i class="material-icons">people</i>
                 </div>
                 <p class="card-category">TOTAL INDIVIDUS EN TRAITEMENT</p>
-                <h1 class="card-title">75
+                <h1 class="card-title">0
                     <br>
                     <small style="font-size: 25px">soit</small>
-                    <small><b>37,5%</b></small>
+                    <small><b>0%</b></small>
                 </h1>
             </div>
             <div class="card-footer">
@@ -452,10 +495,10 @@
                     <i class="material-icons">people</i>
                 </div>
                 <p class="card-category">TOTAL INDIVIDUS GUÉRIS</p>
-                <h1 class="card-title">25
+                <h1 class="card-title">0
                     <br>
                     <small style="font-size: 25px">soit</small>
-                    <small><b>12,5%</b></small>
+                    <small><b>0%</b></small>
                 </h1>
             </div>
             <div class="card-footer">
