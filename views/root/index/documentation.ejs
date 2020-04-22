@@ -13,6 +13,7 @@
 <div class="row justify-content-center">
     <div class="col-md-10">
         <div class="card">
+            <!--
             <div class="card-header card-header-primary">
                 <div class="row justify-content-center">
                     <div class="card-title">
@@ -32,38 +33,40 @@
                     </div>
                 </div>
             </div>
+            -->
             <div class="card-body">
 
             <% for(side of tabside) { %> 
-                <div class="card">
-                    <div class="card-header card-header-primary">
-                        <div class="card-icon">
-                            <i class="material-icons"><%= side.icone %></i>
-                        </div>
+                <% if(side.description.length != 0) { %> 
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                            <div class="card-icon">
+                                <i class="material-icons"><%= side.icone %></i>
+                            </div>
 
-                        <div class="row justify-content-between">
-                            <div class="col-md-6">
-                                <div class="card-title">
-                                    <h2>
-                                        <%= side.texte %>
-                                    </h2>
+                            <div class="row justify-content-between">
+                                <div class="col-md-6">
+                                    <div class="card-title">
+                                        <h2>
+                                            <%= side.texte %>
+                                        </h2>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="<%= side.route %>" class="btn btn-primary">
+                                        Je suis ici
+                                    </a>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <a href="<%= side.route %>" class="btn btn-primary">
-                                    Je suis ici
-                                </a>
+                        </div>
+                        <div class="card-body">
+                            <div class="contenu alinea">
+                                <%= side.description %>
                             </div>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <div class="contenu alinea">
-                            <%= side.description %>
-                        </div>
-                    </div>
-                </div>
-                <br>
-
+                    <br>
+                <% } %> 
             <% } %> 
                 
             </div>

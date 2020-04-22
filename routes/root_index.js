@@ -83,7 +83,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/documentation', (req, res, next) => {
-    var idpage = 0
+    var idpage = 5
     var tabside = Sidebare.activeSidebare(tabsidebase, idpage)
     console.log("================================================================================")
     console.log(tabside[idpage])

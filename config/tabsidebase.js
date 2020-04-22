@@ -28,6 +28,8 @@ Cette option permet de créer des notifications Media pour l'instant et informer
 var text5 = `
 Cette option est destinée à permettre un suivi "temps réel" cartographique de la pandémie, des utilisateurs , des zônes aussi.
 `
+text6 = ""
+
 
 
 
@@ -36,7 +38,8 @@ const tabsidebase = [
     ElementSidebare.nouveauElement("Gestion Individus", "/root/gestion_individus", "people", 0, text2),
     ElementSidebare.nouveauElement("Tracking", "/root/tracking", "gps_fixed", 0, text3),
     ElementSidebare.nouveauElement("Service Com.", "/root/service_com", "rss_feed", 0, text4),
-    ElementSidebare.nouveauElement("Service Mapping", "/root/service_mapping", "place", 0, text5)
+    ElementSidebare.nouveauElement("Service Mapping", "/root/service_mapping", "place", 0, text5),
+    ElementSidebare.nouveauElement("DOCUMENTATION", "/root/index/documentation", "book", 0, text6)
 ]
 
 module.exports = tabsidebase
