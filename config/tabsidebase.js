@@ -16,8 +16,8 @@ Dans la troisième en plus d'avoir les fonctionnalités précédente on pourra r
 
 var text3 = `
 Cette option nous offre les deux plus grandes fonctionnalités du système "SERCOVID-19" à savoir : 
-___le tracking d'individus dans lequel on peut creer des cibles et les "TRACKER" pour connaître leur trajet et qui ils ont probablement rencontrés. <br>
-___le tracking de zône dans lequel on peut créer une zône la cibler, lui changer de statut et ainsi informer l'ensemble des Individus afin qu'il ne s'y aventurent 
+    le tracking d'individus dans lequel on peut creer des cibles et les "TRACKER" pour connaître leur trajet et qui ils ont probablement rencontrés. 
+    le tracking de zône dans lequel on peut créer une zône la cibler, lui changer de statut et ainsi informer l'ensemble des Individus afin qu'il ne s'y aventurent 
 pas par exemple et bien d'autres.
 `
 
