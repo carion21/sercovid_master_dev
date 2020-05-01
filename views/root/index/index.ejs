@@ -4,6 +4,7 @@
     .statcard1 {
         height: 150px;
     }
+
     .statcard2 {
         height: 200px;
     }
@@ -29,7 +30,7 @@
                     <i class="material-icons">people</i>
                 </div>
                 <p class="card-category">TOTAL INDIVIDUS INSCRITS</p>
-                <h1 class="card-title"><%= total_inscrits %> 
+                <h1 class="card-title"><%= total_inscrits %>
                     <br>
                     <small></small>
                 </h1>
@@ -52,12 +53,12 @@
                     <br>
                     <small style="font-size: 25px">soit</small>
                     <small><b>
-                        <% if(pourcent_connectes != Infinity) { %> 
+                            <% if(pourcent_connectes != Infinity) { %>
                             <%= pourcent_connectes %> %
-                        <% } else { %>
+                            <% } else { %>
                             0.00 %
-                        <% } %>  
-                    </b></small>
+                            <% } %>
+                        </b></small>
                 </h1>
             </div>
             <div class="card-footer">
@@ -78,12 +79,12 @@
                     <br>
                     <small style="font-size: 25px">soit</small>
                     <small><b>
-                        <% if(pourcent_deconnectes != Infinity) { %> 
+                            <% if(pourcent_deconnectes != Infinity) { %>
                             <%= pourcent_deconnectes %> %
-                        <% } else { %>
+                            <% } else { %>
                             0.00 %
-                        <% } %>  
-                    </b></small>
+                            <% } %>
+                        </b></small>
                 </h1>
             </div>
             <div class="card-footer">
@@ -142,11 +143,11 @@
                     <small style="font-size: 25px">soit</small>
                     <small>
                         <b>
-                            <% if(pourcent_actifs != Infinity) { %> 
-                                <%= pourcent_actifs %> %
+                            <% if(pourcent_actifs != Infinity) { %>
+                            <%= pourcent_actifs %> %
                             <% } else { %>
-                                0.00 %
-                            <% } %>  
+                            0.00 %
+                            <% } %>
                         </b>
                     </small>
                 </h1>
@@ -170,11 +171,11 @@
                     <small style="font-size: 25px">soit</small>
                     <small>
                         <b>
-                            <% if(pourcent_nonactifs != Infinity) { %> 
-                                <%= pourcent_nonactifs %> %
+                            <% if(pourcent_nonactifs != Infinity) { %>
+                            <%= pourcent_nonactifs %> %
                             <% } else { %>
-                                0.00 %
-                            <% } %>  
+                            0.00 %
+                            <% } %>
                         </b>
                     </small>
                 </h1>
@@ -198,7 +199,7 @@
     <div class="col-8 offset-2">
         <div class="alert alert-info">
             <h4>
-                STATISTIQUES CONCERNANT LES INDIVIDUS SAINS, SUSPECTS ET INFECTES 
+                STATISTIQUES CONCERNANT LES INDIVIDUS SAINS, SUSPECTS ET INFECTES
             </h4>
             <br>
             <h6>
@@ -221,11 +222,11 @@
                     <small style="font-size: 25px">soit</small>
                     <small>
                         <b>
-                            <% if(pourcent_sains != Infinity) { %> 
-                                <%= pourcent_sains %> %
+                            <% if(pourcent_sains != Infinity) { %>
+                            <%= pourcent_sains %> %
                             <% } else { %>
-                                0.00 %
-                            <% } %>  
+                            0.00 %
+                            <% } %>
                         </b>
                     </small>
                 </h1>
@@ -252,11 +253,11 @@
                     <small style="font-size: 25px">soit</small>
                     <small>
                         <b>
-                            <% if(pourcent_suspects != Infinity) { %> 
-                                <%= pourcent_suspects %> %
+                            <% if(pourcent_suspects != Infinity) { %>
+                            <%= pourcent_suspects %> %
                             <% } else { %>
-                                0.00 %
-                            <% } %>  
+                            0.00 %
+                            <% } %>
                         </b>
                     </small>
                 </h1>
@@ -283,11 +284,11 @@
                     <small style="font-size: 25px">soit</small>
                     <small>
                         <b>
-                            <% if(pourcent_infectes != Infinity) { %> 
-                                <%= pourcent_infectes %> %
+                            <% if(pourcent_infectes != Infinity) { %>
+                            <%= pourcent_infectes %> %
                             <% } else { %>
-                                <%= pourcent_infectes %> %
-                            <% } %>  
+                            <%= pourcent_infectes %> %
+                            <% } %>
                         </b>
                     </small>
                 </h1>
@@ -310,12 +311,12 @@
                     <br>
                     <small style="font-size: 25px">soit</small>
                     <small><b>
-                        <% if(pourcent_decedes != Infinity) { %> 
+                            <% if(pourcent_decedes != Infinity) { %>
                             <%= pourcent_decedes %> %
-                        <% } else { %>
+                            <% } else { %>
                             0.00 %
-                        <% } %>  
-                    </b></small>
+                            <% } %>
+                        </b></small>
                 </h1>
             </div>
             <div class="card-footer">
@@ -337,7 +338,7 @@
         <div class="alert alert-info">
             <h4>
                 STATISTIQUES CONCERNANT LES INDIVIDUS INFECTÉS, EN COURS DE TRAITEMENT, GUERIS
-                ET DECEDES 
+                ET DECEDES
             </h4>
             <br>
             <h6>
@@ -355,10 +356,13 @@
                     <i class="material-icons">people</i>
                 </div>
                 <p class="card-category">TOTAL INDIVIDUS INFECTÉS</p>
-                <h1 class="card-title">0
+                <h1 class="card-title">
+                    <% if(statlocal != undefined) { %>
+                        <%= statlocal.totalCas %>
+                    <% } else { %>
+                        0.00
+                    <% } %>
                     <br>
-                    <small style="font-size: 25px">soit</small>
-                    <small><b>0%</b></small>
                 </h1>
             </div>
             <div class="card-footer">
@@ -375,10 +379,23 @@
                     <i class="material-icons">people</i>
                 </div>
                 <p class="card-category">TOTAL INDIVIDUS EN TRAITEMENT</p>
-                <h1 class="card-title">0
+                <h1 class="card-title">
+                    <% if(statlocal != undefined) { %>
+                        <%= statlocal.totalNonGueris %>
+                    <% } else { %>
+                        0.00
+                    <% } %>
                     <br>
                     <small style="font-size: 25px">soit</small>
-                    <small><b>0%</b></small>
+                    <small>
+                        <b>
+                            <% if(statlocal != undefined) { %>
+                                <%= pourcent_local_ng%> %
+                            <% } else { %>
+                                0.00 %
+                            <% } %>
+                        </b>
+                    </small>
                 </h1>
             </div>
             <div class="card-footer">
@@ -395,10 +412,23 @@
                     <i class="material-icons">people</i>
                 </div>
                 <p class="card-category">TOTAL INDIVIDUS GUÉRIS</p>
-                <h1 class="card-title">0
+                <h1 class="card-title">
+                    <% if(statlocal != undefined) { %>
+                        <%= statlocal.totalGueris %>
+                    <% } else { %>
+                        0.00
+                    <% } %>
                     <br>
                     <small style="font-size: 25px">soit</small>
-                    <small><b>0%</b></small>
+                    <small>
+                        <b>
+                            <% if(statlocal != undefined) { %>
+                                <%= pourcent_local_gu%> %
+                            <% } else { %>
+                                0.00 %
+                            <% } %>
+                        </b>
+                    </small>
                 </h1>
             </div>
             <div class="card-footer">
@@ -415,10 +445,23 @@
                     <i class="material-icons">people</i>
                 </div>
                 <p class="card-category">TOTAL INDIVIDUS DÉCÉDÉS</p>
-                <h1 class="card-title">0
+                <h1 class="card-title">
+                <% if(statlocal != undefined) { %>
+                    <%= statlocal.totalDeces %>
+                <% } else { %>
+                    0.00
+                <% } %>
                     <br>
                     <small style="font-size: 25px">soit</small>
-                    <small><b>0%</b></small>
+                    <small>
+                        <b>
+                            <% if(statlocal != undefined) { %>
+                                <%= pourcent_local_dc%> %
+                            <% } else { %>
+                                0.00 %
+                            <% } %>
+                        </b>
+                    </small>
                 </h1>
             </div>
             <div class="card-footer">
@@ -437,7 +480,7 @@
         <div class="alert alert-info">
             <h4>
                 STATISTIQUES CONCERNANT LES INDIVIDUS INFECTÉS, EN COURS DE TRAITEMENT, GUERIS
-                ET DECEDES 
+                ET DECEDES
             </h4>
             <br>
             <h6>
@@ -455,10 +498,13 @@
                     <i class="material-icons">people</i>
                 </div>
                 <p class="card-category">TOTAL INDIVIDUS INFECTÉS</p>
-                <h1 class="card-title">0
+                <h1 class="card-title">
+                    <% if(statnonlocal != undefined) { %>
+                        <%= statnonlocal.totalCas %>
+                    <% } else { %>
+                        0.00
+                    <% } %>
                     <br>
-                    <small style="font-size: 25px">soit</small>
-                    <small><b>0%</b></small>
                 </h1>
             </div>
             <div class="card-footer">
@@ -475,10 +521,23 @@
                     <i class="material-icons">people</i>
                 </div>
                 <p class="card-category">TOTAL INDIVIDUS EN TRAITEMENT</p>
-                <h1 class="card-title">0
+                <h1 class="card-title">
+                    <% if(statnonlocal != undefined) { %>
+                        <%= statnonlocal.totalNonGueris %>
+                    <% } else { %>
+                        0.00
+                    <% } %>
                     <br>
                     <small style="font-size: 25px">soit</small>
-                    <small><b>0%</b></small>
+                    <small>
+                        <b>
+                            <% if(statnonlocal != undefined) { %>
+                                <%= pourcent_nonlocal_ng %> %
+                            <% } else { %>
+                                0.00 %
+                            <% } %>
+                        </b>
+                    </small>
                 </h1>
             </div>
             <div class="card-footer">
@@ -495,10 +554,23 @@
                     <i class="material-icons">people</i>
                 </div>
                 <p class="card-category">TOTAL INDIVIDUS GUÉRIS</p>
-                <h1 class="card-title">0
+                <h1 class="card-title">
+                    <% if(statnonlocal != undefined) { %>
+                        <%= statnonlocal.totalGueris %>
+                    <% } else { %>
+                        0.00
+                    <% } %>
                     <br>
                     <small style="font-size: 25px">soit</small>
-                    <small><b>0%</b></small>
+                    <small>
+                        <b>
+                            <% if(statnonlocal != undefined) { %>
+                                <%= pourcent_nonlocal_gu %> %
+                            <% } else { %>
+                                0.00 %
+                            <% } %>
+                        </b>
+                    </small>
                 </h1>
             </div>
             <div class="card-footer">
@@ -515,10 +587,23 @@
                     <i class="material-icons">people</i>
                 </div>
                 <p class="card-category">TOTAL INDIVIDUS DÉCÉDÉS</p>
-                <h1 class="card-title">0
+                <h1 class="card-title">
+                    <% if(statnonlocal != undefined) { %>
+                        <%= statnonlocal.totalDeces %>
+                    <% } else { %>
+                        0.00
+                    <% } %>
                     <br>
                     <small style="font-size: 25px">soit</small>
-                    <small><b>0%</b></small>
+                    <small>
+                        <b>
+                            <% if(statnonlocal != undefined) { %>
+                                <%= pourcent_nonlocal_dc%> %
+                            <% } else { %>
+                                0.00 %
+                            <% } %>
+                        </b>
+                    </small>
                 </h1>
             </div>
             <div class="card-footer">
