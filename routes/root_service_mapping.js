@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+
+const idgmap = require('../config/constante').constMap()
 const Sidebare = require('../config/sidebare')
 const tabsidebase = require('../config/tabsidebase')
 
@@ -72,7 +74,8 @@ router.get('/:tachedesuivi', (req, res, next) => {
                 res.render(
                     'root/service_mapping/suivi_individus', {
                         tabside: tabside,
-                        idpage: idpage
+                        idpage: idpage,
+                        idgmap: idgmap
                     }
                 );
                 

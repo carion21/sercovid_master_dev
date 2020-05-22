@@ -1,5 +1,10 @@
 var express = require('express');
 var router = express.Router();
+
+const envir = "dev"
+const http = require('http');
+const https = require('https');
+const sercovid2Server = require('../config/constante').constSercovid2(envir)
 const Sidebare = require('../config/sidebare')
 const tabsidebase = require('../config/tabsidebase')
 
@@ -55,8 +60,9 @@ router.post('/notifications/new', function (req, res, next) {
         if (titre.length <= nbcharfixed) {
             let niveau = parseInt(importance)
             if (niveau === 0 || niveau === 1 || niveau === 2) {
+                var codenotif = NotificationClient.genCodeNotificationClient()
                 var notification = {
-                    codeNotification: NotificationClient.genCodeNotificationClient(),
+                    codeNotification: codenotif,
                     titre: titre,
                     lienWeb: lienweb,
                     importance: niveau
@@ -65,6 +71,25 @@ router.post('/notifications/new', function (req, res, next) {
                 NotificationClient.create(notification, (msg) => {
                     console.log(msg)
                 })
+
+                var urlApi = sercovid2Server+"/"+codenotif
+
+                if (envir == "dev") {
+                    http.get(urlApi, (resp) => {
+                        console.log("Sercovid2 est averti...")
+                    }).on("error", (err) => {
+                        console.log("Error: " + err.message);
+                    })
+                } 
+                if(envir == "prod") {
+                    https.get(urlApi, (resp) => {
+                        console.log("Sercovid2 est averti...")
+                    }).on("error", (err) => {
+                        console.log("Error: " + err.message);
+                    })
+                }
+
+                
 
                 res.redirect('/root/service_com/notifications/list')
             } else {
